@@ -1,21 +1,32 @@
+**Prerequisites:** Knowledge of JUnit unit testing framework and SLF4J+Logback logging frameworks
+
 ## Seminar 02 Tasks
 **Task 01** Checkout branch seminar02 from https://github.com/fi-muni/PA165 and
 open project currency-convertor. Look at the interfaces ExchangeRateTable and
 CurrencyConvertor in the package cz.fi.muni.pa165.currency and read their contract.
 
-**Task 02** Add mockito-all as a maven dependency into `pom.xml`:
+**Task 02** Add mockito-core and assertj-core as a maven dependencies into `pom.xml`:
 ```xml
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
-        <version>1.10.19</version>
-        <scope>test</scope>
-  </dependency> 
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.22.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.11.1</version>
+            <scope>test</scope>
+        </dependency>
 ```
 
 **Task 03** Implement `testConvert()` method in `CurrencyConvertorImplTest`.
-Use Mockito for creating mocks and don't forget to test border values and proper
+Use [Mockito](http://site.mockito.org/) for creating mocks, 
+[AssertJ](http://joel-costigliola.github.io/assertj/)
+for assertions and do not forget to test border values and proper
 rounding. Ask your teacher to check if the test is well written.
+(Hint: use [Mockito tutorial](http://www.vogella.com/tutorials/Mockito/article.html).)
 Tip: It is better to use `new BigDecimal("15.29")` than `new BigDecimal(15.29)`
 for creating BigDecimal values in the test. Do you know, why?
 
@@ -29,7 +40,7 @@ try to execute tests.
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.7.12</version>
+        <version>1.7.25</version>
     </dependency>
 ```
 and modify `CurrencyConvertorImpl` class to log:
@@ -37,21 +48,16 @@ and modify `CurrencyConvertorImpl` class to log:
 * Each conversion failure due missing exchange rate for given currencies as a warning
 * Each conversion failure due `ExternalServiceFailureException` as an error
 
-Don't forget to log all useful context information, but avoid unnecessary string
+Do not forget to log all useful context information, but avoid unnecessary string
 concatenations.
 
-**Task 07** Add log4j and slf4j-log4j12 as the maven dependency:
+**Task 07** Add Logback as the maven dependency:
 ```xml
     <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-	<version>1.7.12</version>
-    </dependency>
-    <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.17</version>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
     </dependency>
 ```
-Change log4j configuration to log also trace messages (see log4j.properties file)
+Change logback configuration to log also trace messages (see logback.xml file)
 and try to start tests to check if logging works.
