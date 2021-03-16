@@ -8,15 +8,21 @@ import org.springframework.util.StopWatch;
 import javax.inject.Named;
 
 @Aspect
-//@Named
+@Named
 public class LoggingAspect {
 
     @Around("execution(public * *(..))")
-    public void log(ProceedingJoinPoint pjp) throws Throwable {
+    public Object log(ProceedingJoinPoint pjp) throws Throwable {
+
         StopWatch stopWatch = new StopWatch();
+
         stopWatch.start();
-        pjp.proceed();
+        Object returnvalue = pjp.proceed();
         stopWatch.stop();
-        System.err.println(String.format("A call to method %s took %s.", pjp.getSignature().getName(), stopWatch.shortSummary()));
+
+        System.err.printf("A call to method %s took %s ms.\n",
+                pjp.getSignature().getName(), stopWatch.getLastTaskTimeMillis());
+
+        return returnvalue;
     }
 }

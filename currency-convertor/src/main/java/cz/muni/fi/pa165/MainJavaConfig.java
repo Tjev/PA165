@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.currency.CurrencyConvertor;
-import cz.muni.fi.pa165.currency.CurrencyConvertorImpl;
-import cz.muni.fi.pa165.currency.ExchangeRateTableImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
